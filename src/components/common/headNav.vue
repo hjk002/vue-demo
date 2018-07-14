@@ -33,7 +33,7 @@
                 title:''
             }
         },
-        props:['title'], // 接收来自父级的参数
+        // props:['title'], // 接收来自父级的参数
         created(){
             this.$axios.get('',{params:{
                 title:'vueTitle'
