@@ -1,12 +1,18 @@
 <template>
-    <div>
-        <header>
+    <div id="head-nav">
+        <mt-header :title="title">
+            <router-link to="/" slot="left">
+                <mt-button icon="back" @click="goBack">返回</mt-button>
+            </router-link>
+            <mt-button icon="more" slot="right"></mt-button>
+        </mt-header>
+        <!-- <header>
             <a href="javascript:;" class="iconfont icon-fanhui2" @click="goBack">
                 返回
             </a>
             <span>{{title}}</span>
             <a href="javascript:;" class="iconfont icon-diandian"></a>
-        </header>
+        </header> -->
         <!--
             <mt-header >
                 <router-link to="/" slot="left">
@@ -24,13 +30,18 @@
     export default {
         data() {
             return {
-
+                title:''
             }
         },
         props:['title'], // 接收来自父级的参数
         created(){
-            //console.log( this.$route.query )
-
+            this.$axios.get('',{params:{
+                title:'vueTitle'
+            }}).then((res) => {
+                if(res.statusText='OK'){
+                    this.title=res.data
+                }
+            })
         },
         methods:{
             goBack(){
@@ -41,22 +52,5 @@
 </script>
 
 <style scoped lang="less">
-    @rem:750/10rem;
-    header{
-        height: 80/@rem;
-        background: #3c3f41;
-        color: white !important;
-        font-size: 35/@rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        letter-spacing: 2px;
-        text-align: center;
-        a{
-
-            width: 2rem;
-            color: white !important;
-
-        }
-    }
+    
 </style>
